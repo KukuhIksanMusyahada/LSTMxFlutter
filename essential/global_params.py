@@ -1,0 +1,22 @@
+
+# Cases
+CASES = ["Mach_Variation", "VF_Variation"]
+CASES_MODELS = {1: ["CL", "CD"], 2: ["pitch(airfoil)", "plunge(airfoil)"], 3:["pitch_airfoil", "plunge_airfoil"]}
+VF_CASE = ["Mach_0.6", "Mach_0.7", "Mach_0.8", "Mach_0.9"]
+
+# Data Operational
+NO_ROW = 130
+SIZE_ROW = 4000
+NO_COLUMNS = len(case_model[1])
+
+#Directory Operational
+
+DIRECTORIES = [
+        "Data_source",
+        "Data_source/Models",
+        "Data_source/Raw",
+        "Data_source/Raw/Mach_Variation",
+        "Data_source/Raw/VF_Variation",
+        "Data_source/Results",
+        "Data_source/Processed",
+    ]
