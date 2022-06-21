@@ -7,7 +7,7 @@ VF_CASE = ["Mach_0.6", "Mach_0.7", "Mach_0.8", "Mach_0.9"]
 # Data Operational
 NO_ROW = 130
 SIZE_ROW = 4000
-NO_COLUMNS = len(case_model[1])
+NO_COLUMNS = len(CASES_MODELS[1])
 
 #Directory Operational
 

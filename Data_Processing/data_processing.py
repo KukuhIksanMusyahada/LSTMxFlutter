@@ -2,9 +2,13 @@ import os
 import numpy as np
 import pandas as pd
 
+from TA_LSTMxFlutter.essential import global_params as gp
+from TA_LSTMxFlutter.essential import path_handling as ph
+
+
 
 # Importing Dataset
-def import_data(no_case: int, no_model: int, vf_case: int, datapath=data_raw):
+def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawData()):
     if no_case == 0:
         data_case = os.path.join(datapath, case[no_case])
 

@@ -1,16 +1,16 @@
 import os
-import global_params
+from TA_LSTMxFlutter.essential import global_params
 
 case = global_params.CASES
 
 
-def GetDataSource():
-    return return os.path.abspath(
-        os.path.join(GetThisDir(), os.pardir, "Data_source")
-    )
-
 def GetThisDir():
     return os.path.dirname( os.path.abspath(__file__) )
+
+def GetDataSource():
+    return os.path.abspath(
+        os.path.join(GetThisDir(), os.pardir, "Data_source")
+    ) 
 
 def GetRawData():
     return os.path.join(GetDataSource(), "Raw")
