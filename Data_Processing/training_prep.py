@@ -109,14 +109,14 @@ def train_val_split(dataframe, train_split:int, test_portion= None):
     n = len(dataframe)
     train_df = dataframe[0:int(n*train_split)]
     val_df = dataframe[int(n*train_split):]
-    
+    test_df = None
     if test_portion is not None:
         test_split = (1-test_portion)*n
         val_df= dataframe[int(n*train_split):test_split]
         test_df= dataframe[test_split:]
 
     num_features = dataframe.shape[1]
-    return train_df, val_df, num_features
+    return train_df, val_df, test_df, num_features
 
 
 # interpolation function
