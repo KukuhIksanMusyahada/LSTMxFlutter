@@ -10,6 +10,7 @@ import seaborn as sns
 import tensorflow as tf
 
 
+# Create Sequences dataset
 class WindowGenerator():
   def __init__(self, input_width, label_width, shift,
                train_df=train_df, val_df=val_df, test_df=test_df,
@@ -99,3 +100,78 @@ class WindowGenerator():
     # And cache it for next time
       self._example = result
     return result
+
+
+# Split Dataset to train, and validation
+def train_val_split(dataframe, train_split:int, test_portion= None):
+    column_indices = {name: i for i, name in enumerate(dataframe.columns)}
+
+    n = len(dataframe)
+    train_df = dataframe[0:int(n*train_split)]
+    val_df = dataframe[int(n*train_split):]
+    
+    if test_portion is not None:
+        test_split = (1-test_portion)*n
+        val_df= dataframe[int(n*train_split):test_split]
+        test_df= dataframe[test_split:]
+
+    num_features = dataframe.shape[1]
+    return train_df, val_df, num_features
+
+
+# interpolation function
+
+def interpolate(dataset,size_row):
+  
+    x=np.arange(dataset.shape[0])
+    xvals= np.linspace(0,dataset.shape[0],size_row)
+    data_interp= []
+    for col in range(dataset.shape[1]):
+        y = dataset[:,col]
+        yinterp= np.interp(xvals,x,y)
+        data_interp.append(yinterp)
+    data_interp= np.stack(data_interp, axis=1)
+    data_interp.shape
+    
+    return data_interp
+
+
+# Normalize Data
+def norm(data, min, max, mean, std, minmax= False):
+    if minmax == True:
+        return (data-min)/(max-min)
+    else:
+        return (data-mean)/std
+
+def denorm(data, min, max, mean, std, minmax= False):
+    if minmax == True:
+        return data*(max-min) + min
+    else:
+        return (data * std) + mean
+    
+def df_norm(dataframe, minmax= False):
+    columns= dataframe.columns
+    col_params = {}
+    for column in columns:
+        min = dataframe[column].min()
+        max = dataframe[column].max()
+        mean = dataframe[column].mean()
+        std = dataframe[column].std()
+        col_params[column] = min, max, mean, std
+        if minmax == True:  
+            dataframe[column] = norm(dataframe[column], min, max, mean, std, minmax= True)
+        else:
+            dataframe[column] = norm(dataframe[column], min, max, mean, std, minmax= False)
+    return dataframe, col_params
+
+def df_denorm(dataframe,col_params, minmax= False):
+    columns = dataframe.columns
+    dict_keys = col_params.keys()
+    for column, key in zip(columns, dict_keys):
+        if column == key:
+            if minmax == True:
+                dataframe[column] = denorm(dataframe[column], col_params[column][0], col_params[column][1],
+                                           col_params[column][2], col_params[column][3], minmax= True)
+            dataframe[column] = denorm(dataframe[column], col_params[column][0], col_params[column][1],
+                                           col_params[column][2], col_params[column][3], minmax= False)
+    return dataframe

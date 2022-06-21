@@ -24,20 +24,7 @@ def create_dataset(no_row, no_column, datapath, use_cols):
     dataset = dataset.reshape(no_row, count*no_column)
     return dataset
 
-# interpolation function
 
-def interpolate(dataset,size_row):
-    x=np.arange(dataset.shape[0])
-    xvals= np.linspace(0,dataset.shape[0],size_row)
-    data_interp= []
-    for col in range(dataset.shape[1]):
-        y = dataset[:,col]
-        yinterp= np.interp(xvals,x,y)
-        data_interp.append(yinterp)
-    data_interp= np.stack(data_interp, axis=1)
-    data_interp.shape
-    
-    return data_interp
 
 # labelling function
 
