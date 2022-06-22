@@ -13,7 +13,7 @@ import tensorflow as tf
 # Create Sequences dataset
 class WindowGenerator():
   def __init__(self, input_width, label_width, shift,
-               train_df=train_df, val_df=val_df, test_df=test_df,
+               train_df=None, val_df=None, test_df=None,
                label_columns=None, batch_size= 32):
     # Store the raw data.
     self.train_df = train_df

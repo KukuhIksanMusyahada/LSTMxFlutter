@@ -4,28 +4,30 @@ import pandas as pd
 
 from TA_LSTMxFlutter.essential import global_params as gp
 from TA_LSTMxFlutter.essential import path_handling as ph
+from TA_LSTMxFlutter.Data_Processing.helping_functions import create_dataset
+
 
 
 
 # Importing Dataset
 def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawData()):
     if no_case == 0:
-        data_case = os.path.join(datapath, case[no_case])
+        data_case = os.path.join(datapath, gp.CASES[no_case])
 
         if no_model == 1:
-            use_cols = case_model[no_model]
+            use_cols = gp.CASES_MODELS[no_model]
             dataset = create_dataset(no_row, no_column, data_case, use_cols)
             Labels = labelling(data_case)
             return dataset, Labels
         elif no_model == 2:
             try:
                 no_model +=1
-                use_cols = case_model[no_model]
+                use_cols = gp.CASES_MODELS[no_model]
                 dataset = create_dataset(no_row, no_column, data_case, use_cols)
                 Labels = labelling(data_case)
                 return dataset, Labels
             except:
-                use_cols = case_model[no_model]
+                use_cols = gp.CASES_MODELS[no_model]
                 dataset = create_dataset(no_row, no_column, data_case, use_cols)
                 Labels = labelling(data_case)
                 return dataset, Labels
@@ -33,27 +35,27 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
             print('no_model is not supported in this model')
         
     elif no_case == 1:
-        data_case = os.path.join(datapath, case[no_case])
+        data_case = os.path.join(datapath, gp.CASES[no_case])
 
         if no_model == 1:
-            use_cols = case_model[no_model]
+            use_cols = gp.CASES_MODELS[no_model]
             if vf_case == 0:
-                data_case_VF = os.path.join(data_case, VF_case[0])
+                data_case_VF = os.path.join(data_case, gp.VF_CASE[0])
                 dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 1:
-                data_case_VF = os.path.join(data_case, VF_case[1])
+                data_case_VF = os.path.join(data_case, gp.VF_CASE[1])
                 dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 2:
-                data_case_VF = os.path.join(data_case, VF_case[2])
+                data_case_VF = os.path.join(data_case, gp.VF_CASE[2])
                 dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 3:
-                data_case_VF = os.path.join(data_case, VF_case[3])
+                data_case_VF = os.path.join(data_case, gp.VF_CASE[3])
                 dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
@@ -69,48 +71,48 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
                 print('No Cases Supported!')
 
         elif no_model == 2:
-            use_cols = case_model[no_model]
+            use_cols = gp.CASES_MODELS[no_model]
             if vf_case == 0:
-                data_case_VF = os.path.join(data_case, VF_case[0])
+                data_case_VF = os.path.join(data_case, gp.VF_CASE[0])
                 dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 1:
-                data_case_VF = os.path.join(data_case, VF_case[1])
+                data_case_VF = os.path.join(data_case, gp.VF_CASE[1])
                 try:
                     no_model +=1
-                    use_cols = case_model[no_model]
+                    use_cols = gp.CASES_MODELS[no_model]
                     dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
                 except:
-                    use_cols = case_model[no_model]
+                    use_cols = gp.CASES_MODELS[no_model]
                     dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
             elif vf_case == 2:
-                data_case_VF = os.path.join(data_case, VF_case[2])
+                data_case_VF = os.path.join(data_case, gp.VF_CASE[2])
                 try:
                     no_model +=1
-                    use_cols = case_model[no_model]
+                    use_cols = gp.CASES_MODELS[no_model]
                     dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
                 except:
-                    use_cols = case_model[no_model]
+                    use_cols = gp.CASES_MODELS[no_model]
                     dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
             elif vf_case == 3:
-                data_case_VF = os.path.join(data_case, VF_case[3])
+                data_case_VF = os.path.join(data_case, gp.VF_CASE[3])
                 try:
                     no_model +=1
-                    use_cols = case_model[no_model]
+                    use_cols = gp.CASES_MODELS[no_model]
                     dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
                 except:
-                    use_cols = case_model[no_model]
+                    use_cols = gp.CASES_MODELS[no_model]
                     dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
@@ -137,7 +139,7 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
 
 #Creating dataframe and save it
 
-def creating_dataframe(no_case: int, no_model: int, vf_case: int,size_row:int,names: str, predicted= True, datapath= data_processed):
+def creating_dataframe(no_case: int, no_model: int, vf_case: int,size_row:int,names: str, predicted= True, datapath= ph.GetProcessedData()):
     
     dataset, Labels= import_data(no_case,no_model,vf_case)
     
