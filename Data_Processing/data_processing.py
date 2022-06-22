@@ -174,4 +174,10 @@ def data_process(max_cases= max_cases, max_model_cases= max_model_cases, max_vf_
                     names= f'{gp.CASES_MODELS[model_case][0]}_{gp.CASES_MODELS[model_case][1]}_{gp.CASES[case]}_{gp.VF_CASE[vf_case]}' 
                     creating_dataframe(names, no_case=case, no_model=model_case, vf_case= vf_case, predicted=False)
             
-        
+def GetListTrainData(path= ph.GetProcessedData()):
+    list_df = []
+    for file in os.listdir(path):
+        if file.endswith(".csv"):
+            df= pd.read_csv(os.path.join(path, file))
+            list_df.append(df)
+    return list_df
