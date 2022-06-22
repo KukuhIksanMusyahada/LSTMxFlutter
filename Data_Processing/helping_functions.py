@@ -16,7 +16,7 @@ def extractMachAndVF(file: str):
 
 def create_dataset(no_row, no_column, datapath, use_cols):
     data = []
-    count= 0
+    count = 0
     for file in os.listdir(datapath):
         if file.endswith(".csv"):
             df = pd.read_csv(os.path.join(datapath, file), nrows= no_row)

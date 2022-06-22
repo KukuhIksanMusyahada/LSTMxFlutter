@@ -11,7 +11,7 @@ from TA_LSTMxFlutter.Data_Processing.helping_functions import *
 
 
 # Importing Dataset
-def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawData()):
+def import_data(no_case= None, no_model= None , vf_case=None, datapath=ph.GetRawData()):
     if no_case == 0:
         data_case = os.path.join(datapath, gp.CASES[no_case])
 
@@ -140,7 +140,7 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
 
 #Creating dataframe and save it
 
-def creating_dataframe(no_case: int, no_model: int, vf_case: int,size_row:int,names: str, predicted= True, datapath= ph.GetProcessedData()):
+def creating_dataframe(names: str, no_case=None, no_model=None, vf_case=None,size_row=gp.SIZE_ROW, predicted= True, datapath= ph.GetProcessedData()):
     
     dataset, Labels= import_data(no_case,no_model,vf_case)
     
@@ -153,4 +153,25 @@ def creating_dataframe(no_case: int, no_model: int, vf_case: int,size_row:int,na
         df = pd.DataFrame(data_interp, columns= labels)
     names= names+'.csv'
     df.to_csv(os.path.join(datapath,names), index= False)
-    
+
+max_cases = len(gp.CASES)
+max_model_cases = len(gp.CASES_MODELS)
+max_vf_cases = len(gp.VF_CASE)
+
+# Data Processing
+def data_process(max_cases= max_cases, max_model_cases= max_model_cases, max_vf_cases= max_vf_cases):
+    for case in range(max_cases):
+        if case ==0:
+            for model_case in range(1,max_model_cases):
+                data = import_data(case, model_case)
+                names= f'{gp.CASES_MODELS[model_case][0]}_{gp.CASES_MODELS[model_case][1]}_{gp.CASES[case]}' 
+                creating_dataframe(names, no_case=case, no_model=model_case, predicted= False)
+        
+        if case ==1:
+            for model_case in range(1,max_model_cases):
+                for vf_case in range(max_vf_cases):
+                    data = import_data(case, model_case, vf_case,)
+                    names= f'{gp.CASES_MODELS[model_case][0]}_{gp.CASES_MODELS[model_case][1]}_{gp.CASES[case]}_{gp.VF_CASE[vf_case]}' 
+                    creating_dataframe(names, no_case=case, no_model=model_case, vf_case= vf_case, predicted=False)
+            
+        
