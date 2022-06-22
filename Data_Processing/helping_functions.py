@@ -1,6 +1,9 @@
 import os
 import re
+import pandas as pd
+import numpy as np
 
+from TA_LSTMxFlutter.essential import global_params as gp
 #extracting Mach and Flutter Velocity
 
 def extractMachAndVF(file: str):
@@ -44,7 +47,7 @@ def labelling(datapath):
 
 def label_df(Labels:list, no_case:int):    
     labels=[]
-    cases = case_model[no_case]
+    cases = gp.CASES_MODELS[no_case]
     if no_case == 1 or no_case ==2:
         for label in Labels:
             for case in cases:

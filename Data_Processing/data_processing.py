@@ -4,7 +4,8 @@ import pandas as pd
 
 from TA_LSTMxFlutter.essential import global_params as gp
 from TA_LSTMxFlutter.essential import path_handling as ph
-from TA_LSTMxFlutter.Data_Processing.helping_functions import create_dataset
+from TA_LSTMxFlutter.Data_Processing.training_prep import interpolate
+from TA_LSTMxFlutter.Data_Processing.helping_functions import *
 
 
 
@@ -16,19 +17,19 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
 
         if no_model == 1:
             use_cols = gp.CASES_MODELS[no_model]
-            dataset = create_dataset(no_row, no_column, data_case, use_cols)
+            dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case, use_cols)
             Labels = labelling(data_case)
             return dataset, Labels
         elif no_model == 2:
             try:
                 no_model +=1
                 use_cols = gp.CASES_MODELS[no_model]
-                dataset = create_dataset(no_row, no_column, data_case, use_cols)
+                dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case, use_cols)
                 Labels = labelling(data_case)
                 return dataset, Labels
             except:
                 use_cols = gp.CASES_MODELS[no_model]
-                dataset = create_dataset(no_row, no_column, data_case, use_cols)
+                dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case, use_cols)
                 Labels = labelling(data_case)
                 return dataset, Labels
         else:
@@ -41,22 +42,22 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
             use_cols = gp.CASES_MODELS[no_model]
             if vf_case == 0:
                 data_case_VF = os.path.join(data_case, gp.VF_CASE[0])
-                dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 1:
                 data_case_VF = os.path.join(data_case, gp.VF_CASE[1])
-                dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 2:
                 data_case_VF = os.path.join(data_case, gp.VF_CASE[2])
-                dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 3:
                 data_case_VF = os.path.join(data_case, gp.VF_CASE[3])
-                dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 4:
@@ -74,7 +75,7 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
             use_cols = gp.CASES_MODELS[no_model]
             if vf_case == 0:
                 data_case_VF = os.path.join(data_case, gp.VF_CASE[0])
-                dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                 Labels = labelling(data_case_VF)
                 return dataset, Labels
             elif vf_case == 1:
@@ -82,12 +83,12 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
                 try:
                     no_model +=1
                     use_cols = gp.CASES_MODELS[no_model]
-                    dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                    dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
                 except:
                     use_cols = gp.CASES_MODELS[no_model]
-                    dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                    dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
             elif vf_case == 2:
@@ -95,12 +96,12 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
                 try:
                     no_model +=1
                     use_cols = gp.CASES_MODELS[no_model]
-                    dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                    dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
                 except:
                     use_cols = gp.CASES_MODELS[no_model]
-                    dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                    dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
             elif vf_case == 3:
@@ -108,12 +109,12 @@ def import_data(no_case: int, no_model: int, vf_case: int, datapath=ph.GetRawDat
                 try:
                     no_model +=1
                     use_cols = gp.CASES_MODELS[no_model]
-                    dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                    dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
                 except:
                     use_cols = gp.CASES_MODELS[no_model]
-                    dataset = create_dataset(no_row, no_column, data_case_VF, use_cols)
+                    dataset = create_dataset(gp.NO_ROW, gp.NO_COLUMNS, data_case_VF, use_cols)
                     Labels = labelling(data_case_VF)
                     return dataset, Labels
             elif vf_case == 4:
