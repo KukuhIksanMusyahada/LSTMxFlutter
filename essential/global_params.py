@@ -18,5 +18,12 @@ DIRECTORIES = [
         "Data_source/Raw/Mach_Variation",
         "Data_source/Raw/VF_Variation",
         "Data_source/Results",
+        "Data_source/Results/Tuning",
+        "Data_source/Results/Tuning/cell_tuning",
+        "Data_source/Results/Tuning/layer_tuning",
+        "Data_source/Results/Tuning/optimizer_tuning",
+        "Data_source/Results/Tuning/learningRate_tuning",
+        "Data_source/Results/Preprocessed",
+        "Data_source/Results/Model_performances",
         "Data_source/Processed",
     ]
