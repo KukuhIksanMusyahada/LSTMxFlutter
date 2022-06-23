@@ -1,4 +1,12 @@
 
+# training properties
+LABEL_WIDTH = 1
+INPUT_WIDTH = 1
+SHIFT = 1
+
+
+
+
 # Cases
 CASES = ["Mach_Variation", "VF_Variation"]
 CASES_MODELS = {1: ["CL", "CD"], 2: ["pitch(airfoil)", "plunge(airfoil)"], 3:["pitch_airfoil", "plunge_airfoil"]}

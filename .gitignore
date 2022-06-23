@@ -188,3 +188,5 @@ Data_source/Results/Tuning/optimizer_tuning/LossVsLr.png
 Data_source/Results/Tuning/optimizer_tuning/MAEVsLr.png
 Data_source/Results/Tuning/optimizer_tuning/ValLossVsLr.png
 Data_source/Results/Tuning/optimizer_tuning/VALMAEVsLr.png
+Data_source/Results/Tuning/layer_tuning/LossVsLR.png
+Data_source/Results/Tuning/layer_tuning/ValLossVsLR.png
