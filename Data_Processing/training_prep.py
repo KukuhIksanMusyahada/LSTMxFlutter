@@ -8,11 +8,11 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 
-from TA_LSTMxFlutter.essential.global_params import INPUT_WIDTH,LABEL_WIDTH,SHIFT, SIZE_ROW
+from TA_LSTMxFlutter.essential import global_params as gp
 
 # Create Sequences dataset
 class WindowGenerator():
-  def __init__(self, input_width=INPUT_WIDTH, label_width=LABEL_WIDTH, shift=SHIFT,
+  def __init__(self, input_width=gp.INPUT_WIDTH, label_width=gp.LABEL_WIDTH, shift=gp.SHIFT,
                train_df=None, val_df=None, test_df=None,
                label_columns=None, batch_size= 32):
     # Store the raw data.
@@ -121,7 +121,7 @@ def train_val_split(dataframe, train_split= 0.8, test_portion= None):
 
 # interpolation function
 
-def interpolate(dataset,size_row=SIZE_ROW):
+def interpolate(dataset,size_row=gp.SIZE_ROW):
   
     x=np.arange(dataset.shape[0])
     xvals= np.linspace(0,dataset.shape[0],size_row)
