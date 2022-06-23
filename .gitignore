@@ -180,3 +180,11 @@ Data_source/Raw/VF_Variation/Mach_0.9/M_0.9_VF_1.6.csv
 Data_source/Raw/VF_Variation/Mach_0.9/M_0.9_VF_1.7.csv
 Data_source/Raw/VF_Variation/Mach_0.9/M_0.9_VF_1.8.csv
 Data_source/Raw/VF_Variation/Mach_0.9/M_0.9_VF_2.0.csv
+Data_source/Results/Tuning/layer_tuning/LossVsBidir.png
+Data_source/Results/Tuning/layer_tuning/MAEVsBidir.png
+Data_source/Results/Tuning/layer_tuning/ValLossVsBidir.png
+Data_source/Results/Tuning/layer_tuning/ValMAEVsBidir.png
+Data_source/Results/Tuning/optimizer_tuning/LossVsLr.png
+Data_source/Results/Tuning/optimizer_tuning/MAEVsLr.png
+Data_source/Results/Tuning/optimizer_tuning/ValLossVsLr.png
+Data_source/Results/Tuning/optimizer_tuning/VALMAEVsLr.png

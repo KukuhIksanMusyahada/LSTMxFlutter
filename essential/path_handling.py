@@ -21,6 +21,18 @@ def GetProcessedData():
 def GetModelsData():
     return os.path.join(GetDataSource(), "Models")
 
+def GetResultsData():
+    return os.path.join(GetDataSource(), "Results")
+
+def GetTuningData():
+    return os.path.join(GetResultsData(), "Tuning")
+
+def GetModelPerformancesData():
+    return os.path.join(GetResultsData(), "Model_performances")
+
+def GetPreprocessedData():
+    return os.path.join(GetResultsData(), "Preprocessed")
+
 def GetMachVarModel():
     return os.path.join(GetModelsData(),case[0] )
 

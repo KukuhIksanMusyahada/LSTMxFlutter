@@ -1,5 +1,5 @@
 
-# This code is snipped from https://www.tensorflow.org/tutorials/structured_data/time_series
+# This Window Generator Code was snipped from https://www.tensorflow.org/tutorials/structured_data/time_series
 
 
 import matplotlib as mpl
@@ -102,7 +102,7 @@ class WindowGenerator():
 
 
 # Split Dataset to train, and validation
-def train_val_split(dataframe, train_split:int, test_portion= None):
+def train_val_split(dataframe, train_split= 0.8, test_portion= None):
     column_indices = {name: i for i, name in enumerate(dataframe.columns)}
 
     n = len(dataframe)
