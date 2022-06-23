@@ -1,13 +1,17 @@
 import tensorflow as tf
 import numpy as np
 import os
+import pandas as pd
+
 
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
 from keras.losses import Huber
+from TA_LSTMxFlutter.Data_Processing.training_prep import df_norm
 
 from TA_LSTMxFlutter.essential import global_params as gp
 from TA_LSTMxFlutter.essential import path_handling as ph
+from TA_LSTMxFlutter.Data_Processing.training_prep import WindowGenerator
 
 
 def model(train_data= None,val_data=None,test_data= None,max_epochs=100, num_features= 8):
@@ -41,3 +45,11 @@ def save_model(model,no_case= None, no_model= None , vf_case=None, path= ph.GetM
         names=f'LSTM{no_case}{no_model}{vf_case}.h5'
     dir = os.path.join(path, names)
     model.save(dir)
+
+def forecast_and_plot(file=None, path=ph.GetProcessedData(),target_path= ph.GetModelPerformancesData()):
+    if file != None:
+        path = os.path.join(path, file)
+        df= pd.read_csv(path)
+        df, params = df_norm(df)
+        window= WindowGenerator(train_df=df)
+        train = window.train
