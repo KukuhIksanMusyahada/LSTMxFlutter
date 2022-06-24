@@ -11,7 +11,8 @@ from TA_LSTMxFlutter.Data_Processing.training_prep import df_norm
 
 from TA_LSTMxFlutter.essential import global_params as gp
 from TA_LSTMxFlutter.essential import path_handling as ph
-from TA_LSTMxFlutter.Data_Processing.training_prep import WindowGenerator
+from TA_LSTMxFlutter.Data_Processing.training_prep import WindowGenerator, train_val_split
+
 
 
 def model(train_data= None,val_data=None,test_data= None,max_epochs=100, num_features= 8):
@@ -46,7 +47,8 @@ def save_model(model,no_case= None, no_model= None , vf_case=None, path= ph.GetM
     dir = os.path.join(path, names)
     model.save(dir)
 
-def load_and_evaluate(file:str =None,test_file=None, data_path= ph.GetProcessedData(),models_path=ph.GetModelsData(),target_path= ph.GetModelPerformancesData()):
+
+def load_and_evaluate(file:str =None,test_file=None,type= None, data_path= ph.GetProcessedData(),models_path=ph.GetModelsData(),target_path= ph.GetModelPerformancesData()):
     models, models_perform=dict(), dict()
     if test_file != None:
         path = os.path.join(data_path, test_file)
@@ -54,18 +56,26 @@ def load_and_evaluate(file:str =None,test_file=None, data_path= ph.GetProcessedD
             model_path = os.path.join(models_path, file)
             df= pd.read_csv(path)
             df, params = df_norm(df)
-            window= WindowGenerator(train_df=df)
-            test = window.train
+            if type != None:
+                train_df, val_df, test_df, num_features = train_val_split(df)
+                window= WindowGenerator(train_df=train_df, val_df=val_df)
+                if type=='train':
+                    test = window.train
+                elif type=='val':
+                    test = window.val
+            else:
+                window= WindowGenerator(train_df=df)
+                test = window.train
             model = tf.keras.models.load_model(model_path)
             print(model.summary())
             print('---------------------------------------------------------------------------')
-            loss, mae  = model.evaluate(test, verbose=0)
+            loss, mae  = model.evaluate(test, verbose=2)
             print(f'Model`s loss: {loss} \n Model`s MAE: {mae}')
             models_perform['loss']=loss
             models_perform['mae'] = mae
             return model, models_perform
         else:
-            total_file= len(os.listdir(models_path))
+            total_file= len(os.listdir(models_path)) 
             print(f'Total Models detected: {total_file}')
             print('Loading Models')
             for file in os.listdir(models_path):
