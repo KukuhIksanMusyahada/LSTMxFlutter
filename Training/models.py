@@ -46,10 +46,39 @@ def save_model(model,no_case= None, no_model= None , vf_case=None, path= ph.GetM
     dir = os.path.join(path, names)
     model.save(dir)
 
-def forecast_and_plot(file=None, path=ph.GetProcessedData(),target_path= ph.GetModelPerformancesData()):
+def load_and_evaluate(file:str =None, models_path=ph.GetModelsData(),target_path= ph.GetModelPerformancesData()):
+    models, models_perform=dict(), dict()
     if file != None:
-        path = os.path.join(path, file)
+        path = os.path.join(models_path, file)
         df= pd.read_csv(path)
         df, params = df_norm(df)
         window= WindowGenerator(train_df=df)
-        train = window.train
+        test = window.train
+        model = tf.keras.models.load_model(path)
+        print(model.summary())
+        print('---------------------------------------------------------------------------')
+        loss, mae  = model.evaluate(test, verbose=0)
+        print(f'Model`s loss: {loss} \n Model`s MAE: {mae}')
+        models_perform['loss']=loss
+        models_perform['mae'] = mae
+        return model, models_perform
+    else:
+        path = os.path.join(models_path, file)
+        total_file= len(os.listdir(models_path))
+        print(f'Total Models detected: {total_file}')
+        print('Loading Models')
+        for file in os.listdir(models_path):
+            df= pd.read_csv(path)
+            df, params = df_norm(df)
+            window= WindowGenerator(train_df=df)
+            test = window.train
+            model = tf.keras.models.load_model(path)
+            models[file]= model
+            print('---------------------------------------------------------------------------')
+            loss, mae  = model.evaluate(test, verbose=0)
+            models_perform[file]=[loss, mae]
+        return models, models_perform
+
+
+
+
