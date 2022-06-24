@@ -4,7 +4,6 @@ import pandas as pd
 
 from TA_LSTMxFlutter.essential import global_params as gp
 from TA_LSTMxFlutter.essential import path_handling as ph
-from TA_LSTMxFlutter.Data_Processing.training_prep import interpolate
 from TA_LSTMxFlutter.Data_Processing.helping_functions import *
 
 
@@ -137,6 +136,23 @@ def import_data(no_case= None, no_model= None , vf_case=None, datapath=ph.GetRaw
         print(
             "This project only work on 2 cases, \n \t case 0: Mach Variation,\n \t case 1: Velocity Flutter Variation"
         )
+
+# interpolation function
+
+def interpolate(dataset,size_row=gp.SIZE_ROW):
+  
+    x=np.arange(dataset.shape[0])
+    xvals= np.linspace(0,dataset.shape[0],size_row)
+    data_interp= []
+    for col in range(dataset.shape[1]):
+        y = dataset[:,col]
+        yinterp= np.interp(xvals,x,y)
+        data_interp.append(yinterp)
+    data_interp= np.stack(data_interp, axis=1)
+    data_interp.shape
+    
+    return data_interp
+
 
 #Creating dataframe and save it
 
