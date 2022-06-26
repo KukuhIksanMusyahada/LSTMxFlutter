@@ -54,22 +54,29 @@ def load_and_evaluate(file:str =None,test_file=None,type= None, data_path= ph.Ge
         path = os.path.join(data_path, test_file)
         if file != None:
             model_path = os.path.join(models_path, file)
+            model = tf.keras.models.load_model(model_path)
             df= pd.read_csv(path)
-            df, params = df_norm(df)
+            df, params = df_norm(df, minmax= True)
             if type != None:
                 train_df, val_df, test_df, num_features = train_val_split(df)
-                window= WindowGenerator(train_df=train_df, val_df=val_df)
+                window= WindowGenerator(train_df=train_df, val_df=val_df, batch_size=40)
+                train = window.train
+                val = window.val
+
                 if type=='train':
-                    test = window.train
+                    test = train
                 elif type=='val':
-                    test = window.val
+                    test = val
+                else:
+                    print('only support type= train, val, and left it empty to combine train and val')
+                
             else:
-                window= WindowGenerator(train_df=df)
+                window= WindowGenerator(train_df=df, batch_size=40)
                 test = window.train
-            model = tf.keras.models.load_model(model_path)
+            
             print(model.summary())
             print('---------------------------------------------------------------------------')
-            loss, mae  = model.evaluate(test, verbose=2)
+            loss, mae  = model.evaluate(test, verbose=0)
             print(f'Model`s loss: {loss} \n Model`s MAE: {mae}')
             models_perform['loss']=loss
             models_perform['mae'] = mae
@@ -96,7 +103,7 @@ def load_and_evaluate(file:str =None,test_file=None,type= None, data_path= ph.Ge
             if file != None:
                 model_path = os.path.join(models_path, file)
                 df= pd.read_csv(path)
-                df, params = df_norm(df)
+                df, params = df_norm(df, minmax=True)
                 window= WindowGenerator(train_df=df)
                 test = window.train
                 model = tf.keras.models.load_model(model_path)
@@ -123,7 +130,5 @@ def load_and_evaluate(file:str =None,test_file=None,type= None, data_path= ph.Ge
                     loss, mae  = model.evaluate(test, verbose=0)
                     models_perform[file]=[loss, mae]
                 return models, models_perform
-
-
 
 
