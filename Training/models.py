@@ -27,13 +27,13 @@ def model(train_data= None,val_data=None,test_data= None,max_epochs=100, num_fea
 )
 
     model = Sequential([
-        LSTM(750, input_shape=[gp.LABEL_WIDTH,num_features]),
-        Dense(8)
+        LSTM(300, input_shape=[gp.LABEL_WIDTH,num_features]),
+        Dense(num_features)
     ])
     model.compile(
         loss= Huber(),
-            optimizer=tf.keras.optimizers.Adamax(learning_rate= 5e-4),
-            metrics=["mae"]
+        optimizer=tf.keras.optimizers.Adamax(learning_rate= 5e-4),
+        metrics=["mae"]
     )
     history= model.fit(train_data, epochs=max_epochs, verbose=0,
         validation_data= val_data,callbacks= myEarlyStop)
