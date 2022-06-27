@@ -35,17 +35,21 @@ def model(train_data= None,val_data=None,test_data= None,max_epochs=100, num_fea
             optimizer=tf.keras.optimizers.Adamax(learning_rate= 5e-4),
             metrics=["mae"]
     )
-    history= model.fit(train_data, epochs=max_epochs, validation_data= val_data,callbacks= myEarlyStop)
-
+    history= model.fit(train_data, epochs=max_epochs, verbose=0,
+        validation_data= val_data,callbacks= myEarlyStop)
+    print('Training Done')
     return model, history
 
-def save_model(model,no_case= None, no_model= None , vf_case=None, path= ph.GetModelsData()):
-    if no_case==0: 
-        names=f'LSTM{no_case}{no_model}.h5'
-    elif no_case==1:
-        names=f'LSTM{no_case}{no_model}{vf_case}.h5'
+def save_model(model,names= None, no_case= None, no_model= None , vf_case=None, path= ph.GetModelsData()):
+    if names == None:
+        if no_case==0: 
+            names=f'LSTM{no_case}{no_model}.h5'
+        elif no_case==1:
+            names=f'LSTM{no_case}{no_model}{vf_case}.h5'
+    names= f'LSTM{names}.h5'
     dir = os.path.join(path, names)
     model.save(dir)
+    print('Done Saving Model')
 
 
 def load_and_evaluate(file:str =None,test_file=None,type= None, data_path= ph.GetProcessedData(),models_path=ph.GetModelsData(),target_path= ph.GetModelPerformancesData()):

@@ -187,10 +187,11 @@ def data_process(max_cases= gp.MAX_CASES, max_model_cases= gp.MAX_MODEL_CASES, m
                     names= f'{gp.CASES_MODELS[model_case][0]}_{gp.CASES_MODELS[model_case][1]}_{gp.CASES[case]}_{gp.VF_CASE[vf_case]}' 
                     creating_dataframe(names, no_case=case, no_model=model_case, vf_case= vf_case, predicted=False)
             
-def GetListTrainData(path= ph.GetProcessedData()):
-    list_df = []
+def GetDictTrainData(path= ph.GetProcessedData()):
+    dict_df = dict()
     for file in os.listdir(path):
         if file.endswith(".csv"):
+            names = file.replace('.csv','')
             df= pd.read_csv(os.path.join(path, file))
-            list_df.append(df)
-    return list_df
+            dict_df[names]= df
+    return dict_df

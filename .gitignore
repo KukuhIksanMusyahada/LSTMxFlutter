@@ -191,3 +191,5 @@ Data_source/Results/Tuning/optimizer_tuning/VALMAEVsLr.png
 Data_source/Results/Tuning/layer_tuning/LossVsLR.png
 Data_source/Results/Tuning/layer_tuning/ValLossVsLR.png
 Data_source/Models/LSTM01.h5
+Data_source/Models/LSTMCL_CD_Mach_Variation.h5
+Data_source/Models/LSTMCL_CD_VF_Variation_Mach_0.6.h5
