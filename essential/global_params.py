@@ -11,6 +11,9 @@ SHIFT = 1
 CASES = ["Mach_Variation", "VF_Variation"]
 CASES_MODELS = {1: ["CL", "CD"], 2: ["pitch(airfoil)", "plunge(airfoil)"], 3:["pitch_airfoil", "plunge_airfoil"]}
 VF_CASE = ["Mach_0.6", "Mach_0.7", "Mach_0.8", "Mach_0.9"]
+MAX_CASES = len(gp.CASES)
+MAX_MODEL_CASES = len(gp.CASES_MODELS)
+MAX_VF_CASES = len(gp.VF_CASE)
 
 # Data Operational
 NO_ROW = 130

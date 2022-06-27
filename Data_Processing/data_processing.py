@@ -170,12 +170,9 @@ def creating_dataframe(names: str, no_case=None, no_model=None, vf_case=None,siz
     names= names+'.csv'
     df.to_csv(os.path.join(datapath,names), index= False)
 
-max_cases = len(gp.CASES)
-max_model_cases = len(gp.CASES_MODELS)
-max_vf_cases = len(gp.VF_CASE)
 
 # Data Processing
-def data_process(max_cases= max_cases, max_model_cases= max_model_cases, max_vf_cases= max_vf_cases):
+def data_process(max_cases= gp.MAX_CASES, max_model_cases= gp.MAX_MODEL_CASES, max_vf_cases= gp.MAX_VF_CASES):
     for case in range(max_cases):
         if case ==0:
             for model_case in range(1,max_model_cases):

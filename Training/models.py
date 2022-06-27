@@ -35,9 +35,9 @@ def model(train_data= None,val_data=None,test_data= None,max_epochs=100, num_fea
             optimizer=tf.keras.optimizers.Adamax(learning_rate= 5e-4),
             metrics=["mae"]
     )
-    model.fit(train_data, epochs=max_epochs, validation_data= val_data,callbacks= myEarlyStop)
+    history= model.fit(train_data, epochs=max_epochs, validation_data= val_data,callbacks= myEarlyStop)
 
-    return model
+    return model, history
 
 def save_model(model,no_case= None, no_model= None , vf_case=None, path= ph.GetModelsData()):
     if no_case==0: 
