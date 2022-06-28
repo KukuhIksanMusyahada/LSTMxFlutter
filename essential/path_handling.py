@@ -1,5 +1,5 @@
 import os
-from TA_LSTMxFlutter.essential import global_params
+from Essential import global_params
 
 case = global_params.CASES
 

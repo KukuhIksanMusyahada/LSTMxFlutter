@@ -3,7 +3,7 @@ import re
 import pandas as pd
 import numpy as np
 
-from TA_LSTMxFlutter.Essential import global_params as gp
+from Essential import global_params as gp
 #extracting Mach and Flutter Velocity
 
 def extractMachAndVF(file: str):

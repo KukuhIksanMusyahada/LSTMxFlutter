@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-from TA_LSTMxFlutter.essential import path_handling as ph
+from Essential import path_handling as ph
 
 def history_plot(history, path = ph.GetModelPerformancesData()):
   '''Plots the training and validation loss and mae from a history object'''

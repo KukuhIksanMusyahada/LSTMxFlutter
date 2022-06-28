@@ -7,11 +7,11 @@ import pandas as pd
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
 from keras.losses import Huber
-from TA_LSTMxFlutter.Data_Processing.training_prep import df_norm
+from Data_Processing.training_prep import df_norm
 
-from TA_LSTMxFlutter.essential import global_params as gp
-from TA_LSTMxFlutter.essential import path_handling as ph
-from TA_LSTMxFlutter.Data_Processing.training_prep import WindowGenerator, train_val_split
+from Essential import global_params as gp
+from Essential import path_handling as ph
+from Data_Processing.training_prep import WindowGenerator, train_val_split
 
 
 
@@ -62,7 +62,7 @@ def load_and_evaluate(file:str =None,test_file=None,type= None, data_path= ph.Ge
             df= pd.read_csv(path)
             df, params = df_norm(df, minmax= True)
             if type != None:
-                train_df, val_df, test_df, num_features = train_val_split(df)
+                train_df, val_df, _, num_features = train_val_split(df)
                 window= WindowGenerator(train_df=train_df, val_df=val_df, batch_size=40)
                 train = window.train
                 val = window.val
@@ -136,3 +136,5 @@ def load_and_evaluate(file:str =None,test_file=None,type= None, data_path= ph.Ge
                 return models, models_perform
 
 
+def forecast(model=None, test_file=None,):
+    pass
