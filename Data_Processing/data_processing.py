@@ -2,8 +2,8 @@ import os
 import numpy as np
 import pandas as pd
 
-from TA_LSTMxFlutter.essential import global_params as gp
-from TA_LSTMxFlutter.essential import path_handling as ph
+from TA_LSTMxFlutter.Essential import global_params as gp
+from TA_LSTMxFlutter.Essential import path_handling as ph
 from TA_LSTMxFlutter.Data_Processing.helping_functions import *
 
 

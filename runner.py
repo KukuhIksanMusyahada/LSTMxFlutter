@@ -9,12 +9,11 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
 import tensorflow as tf
 
 
-from TA_LSTMxFlutter.essential import path_handling as ph
-from TA_LSTMxFlutter.essential import global_params as gp
+from TA_LSTMxFlutter.Essential import path_handling as ph
+from TA_LSTMxFlutter.Essential import global_params as gp
 from TA_LSTMxFlutter.Data_Processing import data_processing as dp
 from TA_LSTMxFlutter.Data_Processing import training_prep as tp
 from TA_LSTMxFlutter.Training import models
@@ -61,3 +60,5 @@ def main():
             
             model,history = models.model(train_data= train,val_data= val,test_data= None, num_features=num_features)
             models.save_model(model,names=name)
+    else:
+        pass 

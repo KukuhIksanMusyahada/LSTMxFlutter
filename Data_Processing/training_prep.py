@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 
-from TA_LSTMxFlutter.essential import global_params as gp
+from TA_LSTMxFlutter.Essential import global_params as gp
 
 # Create Sequences dataset
 class WindowGenerator():
