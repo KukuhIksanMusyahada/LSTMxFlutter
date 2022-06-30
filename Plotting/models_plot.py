@@ -1,9 +1,10 @@
+import os
 import matplotlib.pyplot as plt
 
 
 from Essential import path_handling as ph
 
-def history_plot(history, path = ph.GetModelPerformancesData()):
+def history_plot(history,model_names=None, path = ph.GetModelPerformancesData()):
   '''Plots the training and validation loss and mae from a history object'''
   mae = history.history['mae']
   val_mae = history.history['val_mae']
@@ -24,7 +25,8 @@ def history_plot(history, path = ph.GetModelPerformancesData()):
   plt.legend()
 
   plt.show()
-  plt.savefig('.')
+  path= os.path.join(path, model_names)
+  plt.savefig(path)
 
 def model_forecast_plot():
     pass

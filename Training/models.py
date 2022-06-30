@@ -12,6 +12,7 @@ from Data_Processing.training_prep import df_norm
 from Essential import global_params as gp
 from Essential import path_handling as ph
 from Data_Processing.training_prep import WindowGenerator, train_val_split
+from TA_LSTMxFlutter.Data_Processing.training_prep import df_denorm
 
 
 
@@ -136,5 +137,15 @@ def load_and_evaluate(file:str =None,test_file=None,type= None, data_path= ph.Ge
                 return models, models_perform
 
 
-def forecast(model=None, test_file=None,):
-    pass
+def forecast(model=None, test_file=None,data_path= ph.GetProcessedData(),models_path=ph.GetModelsData()):
+    test_file= os.path.join(data_path, test_file)
+    model_path = os.path.join(models_path, model)
+    model= tf.keras.models.load_model(model_path)
+    df = pd.read_csv(test_file)
+    df, params = df_norm(df)
+    window= WindowGenerator(train_df=df)
+    test= window.train
+    y_pred = model.predict(test, verbose=1)
+    y_pred = df_denorm(dataframe=y_pred, col_params= params, minmax= True)
+
+    return y_pred
