@@ -3,7 +3,8 @@ import scipy as sc
 
 
 # Define Matrix A
-
+def create_sol_mat():
+    pass
 
 
 #Perform SVD
