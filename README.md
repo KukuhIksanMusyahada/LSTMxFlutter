@@ -1,2 +1,2 @@
-# TA_LSTMxFlutter
-This repository is created to build surrogate model for flutter case in Airfoil
+# LSTMxFlutter
+This repository is created to forecast flutter phenomena in Airfoil with LSTM model
